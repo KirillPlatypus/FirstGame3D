@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class BaseBullet : Bullet
 {
     public override float LifeTime {get;set;} = 1f;

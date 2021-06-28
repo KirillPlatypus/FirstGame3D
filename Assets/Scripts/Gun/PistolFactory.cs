@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Scripts.Gun
+namespace Gun
 {
     public abstract class GunFactory 
     {
@@ -8,6 +8,7 @@ namespace Scripts.Gun
 
         public abstract Shot ConcreteShot();
         public abstract Bullet ConcreteBullet();
+        public abstract GunSound ConcreteSound();
     }
     public class PistolFactory : GunFactory
     {
@@ -27,6 +28,10 @@ namespace Scripts.Gun
         public override Bullet ConcreteBullet()
         {
             return new BaseBullet();
+        }
+        public override GunSound ConcreteSound()
+        {
+            return new PistolSound();
         }
 
     }
