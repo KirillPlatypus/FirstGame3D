@@ -5,11 +5,13 @@ using Gun.Modifications;
 
 namespace Gun
 {
-    public class Pistol : MonoBehaviour
-    {
+    public class PistolRay : MonoBehaviour
+    {        
         [SerializeField] Transform spawn;
 
-        [SerializeField] GameObject bulletOriginal;
+        [SerializeField] int damage;
+        [SerializeField] int distance;
+
         [SerializeField] int maxAmmo;
 
         [SerializeField] AudioSource source;
@@ -20,13 +22,12 @@ namespace Gun
         float time;
         GunFactory pistol;
         Shot shot;
-        Bullet bullet;
         GunSound sound;
+
         private void Awake() 
         {
-            pistol = new PistolFactory(spawn, bulletOriginal);
+            pistol = new PistolRayFactory(distance, spawn, damage);
             shot = pistol.ConcreteShot();
-            bullet = pistol.ConcreteBullet();
             sound = pistol.ConcreteSound();
             sound.source = source;
 
@@ -53,9 +54,8 @@ namespace Gun
             {
 
             }
-            
-            bulletOriginal.AddComponent(bullet.GetType());
         }
+
         private void Update() 
         {
             time += Time.deltaTime;
@@ -67,6 +67,12 @@ namespace Gun
                 time = 0;
                 sound.Play();
             }            
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawRay(spawn.position, spawn.forward);
         }
     }
 }

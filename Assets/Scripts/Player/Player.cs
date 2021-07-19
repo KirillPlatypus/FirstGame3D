@@ -4,8 +4,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Player
 {
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviour, IGetDamage
     {
+        public int Health{get; set;} = 100;
         [SerializeField] Head head;
         [SerializeField] float speed;
 

@@ -2,17 +2,10 @@ using UnityEngine;
 
 namespace Gun
 {
-    public abstract class GunFactory 
-    {
-        public abstract int ammo{get; set;}
-
-        public abstract Shot ConcreteShot();
-        public abstract Bullet ConcreteBullet();
-        public abstract GunSound ConcreteSound();
-    }
     public class PistolFactory : GunFactory
     {
         public override int ammo{get; set;} 
+
         Transform spawn;
         GameObject bullet;
         public PistolFactory(Transform spawn, GameObject bullet)
@@ -35,6 +28,35 @@ namespace Gun
         }
 
     }
+    public class PistolRayFactory : GunFactory
+    {
+        public override int ammo{get; set;} 
+
+        int distance;
+
+        int damage;
+
+        Transform spawn;
+        Transform endSpawn;
+
+        public PistolRayFactory(int distance, Transform spawn, int damage)
+        {
+            this.distance = distance;
+            this.spawn = spawn;
+            this.damage = damage;
+        }
+
+        public override Shot ConcreteShot()
+        {
+            return new RayShot(distance, spawn, damage);
+        }
+        public override GunSound ConcreteSound()
+        {
+            return new PistolSound();
+        }
+
+    }
+
 
 
 }

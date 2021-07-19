@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BaseShot : Shot
 {
-    Transform spawn;
-    GameObject bullet;
-    public BaseShot(Transform spawn, GameObject bullet) : base(spawn, bullet)
+    public BaseShot(Transform spawn, GameObject bullet)
     {
+        this.spawn = spawn;
+        this.bullet = bullet;
     }
 }
